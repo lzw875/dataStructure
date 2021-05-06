@@ -3,12 +3,12 @@
 #include"heads.h"
 using namespace std;
 
-template<typename T>
+template<class T>
 void dispList(T *lst, int len)
 {
     for(int i = 0; i < len; ++i)
     {
-        cout << *lst << " ";
+        cout << lst->data[i] << " ";
         ++lst;
     }
     cout << endl;
