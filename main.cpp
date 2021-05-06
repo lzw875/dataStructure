@@ -11,4 +11,6 @@ int main()
     // myList::getElem
     int* a = 0;
     cout << myList<int>::getElem(p, 0, a) << endl;
+    int val[5] = {0};
+    dispList(val, 5);
 }
