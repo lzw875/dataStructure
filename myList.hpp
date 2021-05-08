@@ -44,9 +44,9 @@ bool myList<ElemType>::listDelete(myList *lst, int ind, ElemType *e)
         return ERROR;
     }
     *e = lst->data[ind];
-    for(int i = ind; i+1 < lst->length; ++i)
+    for (int i = ind; i + 1 < lst->length; ++i)
     {
-        lst->data[i] = lst->data[i+1];
+        lst->data[i] = lst->data[i + 1];
     }
     lst->length--;
     return OK;
@@ -67,7 +67,7 @@ bool myList<ElemType>::listInsert(myList *lst, int ind, ElemType *e)
     {
         for (int i = lst->length - 1; i >= ind; --i)
         {
-            lst->data[i+1] = lst->data[i];
+            lst->data[i + 1] = lst->data[i];
         }
     }
     lst->data[ind] = *e;
