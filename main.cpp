@@ -10,7 +10,7 @@ int main()
     // test setElem()
     int pSize = p->getSize();
     cout << p->getLength() << endl;
-    for (int i = 0; i < p->getSize()-1; i++)
+    for (int i = 0; i < p->getSize() - 1; i++)
     {
         p->setElem(i, i);
     }
