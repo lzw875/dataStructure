@@ -7,20 +7,12 @@ using namespace std;
 int main()
 {
     // init a linkList
-    linkList<int> *linkHeadNode = new linkList<int>(0);
-    linkList<int> *l1 = new linkList<int>(0);
-    linkList<int> *l2 = new linkList<int>(1);
-    linkHeadNode->next = l1;
-    l1->next = l2;
-    int e = 9;
-    linkList<int>::getElem(linkHeadNode, 1, &e);
-    cout << e << endl;
-    linkList<int>::showElems(linkHeadNode);
-    e = 9;
-    linkList<int>::inserElem(linkHeadNode, 2, &e);
-    linkList<int>::showElems(linkHeadNode);
-    e = 0;
-    linkList<int>::deleteElem(linkHeadNode, 2, &e);
-    linkList<int>::showElems(linkHeadNode);
-    cout << e << endl;
+    linkList<int> headNode;
+    linkList<int>::creatListHead(&headNode, 20);
+    linkList<int>::showElems(&headNode);
+    linkList<int> *p = &headNode;
+    linkList<int>::showElems(p);
+    linkList<int>::clearListHead(p);
+    linkList<int>::showElems(p);
+
 }

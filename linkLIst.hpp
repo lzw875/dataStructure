@@ -20,7 +20,8 @@ public:
     static bool getElem(linkList *L, int ind, ElemType *e);
     static bool inserElem(linkList *L, int ind, ElemType *e);
     static bool deleteElem(linkList *L, int ind, ElemType *e);
-    // static void initLinkList(linkList *L, int len);
+    static bool creatListHead(linkList *L, int len);
+    static bool clearListHead(linkList *L);
 };
 
 template <typename ElemType>
@@ -49,7 +50,7 @@ linkList<ElemType>::~linkList()
 template <typename ElemType>
 void linkList<ElemType>::showElems(linkList *L)
 {
-    while (L->next)
+    while (L->next != nullptr)
     {
         cout << L->next->data << " ";
         L = L->next;
@@ -130,14 +131,34 @@ bool linkList<ElemType>::deleteElem(linkList *L, int ind, ElemType *e)
     delete q;
     return OK;
 }
-// template<typename ElemType>
-// void linkList<ElemType>::initLinkList(linkList *L, int len)
-// {
-//     L->data = len;
-//     for(int i = 0; i < len; ++i)
-//     {
 
-//     }
-// }
+template <typename ElemType>
+bool linkList<ElemType>::creatListHead(linkList *L, int len)
+{
+    *L = *(new linkList(len));
+    linkList *p = L;
+    srand(time(0));
+    for (int i = 0; i < len; ++i)
+    {
+        p->next = new linkList(rand() % 100 + 1);
+        p = p->next;
+    }
+    return OK;
+}
+
+template <typename ElemType>
+bool linkList<ElemType>::clearListHead(linkList *L)
+{
+    linkList *p, *q;
+    p = L->next;
+    while (p)
+    {
+        q = p;
+        p = p->next;
+        delete q;
+    }
+    L->next = nullptr;
+    return OK;
+}
 
 #endif
