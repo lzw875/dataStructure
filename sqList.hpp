@@ -1,11 +1,11 @@
-#ifndef myList_H
-#define myList_H
+#ifndef SQList_H
+#define SQList_H
 #include "heads.h"
 #define OK 1
 #define ERROR 0
 
 template <typename ElemType>
-class myList
+class sqList
 {
 private:
     static const int MAXSIZE = 20;
@@ -14,26 +14,26 @@ private:
     int size;
 
 public:
-    myList(/* args */);
-    static bool listInsert(myList *lst, int ind, ElemType *e);
-    static bool listDelete(myList *lst, int ind, ElemType *e);
+    sqList(/* args */);
+    static bool listInsert(sqList *lst, int ind, ElemType *e);
+    static bool listDelete(sqList *lst, int ind, ElemType *e);
     void showElems();
-    static bool getElem(myList *lst, int ind, ElemType *e);
+    static bool getElem(sqList *lst, int ind, ElemType *e);
     int getLength();
     int getSize();
     bool setElem(int ind, ElemType e);
-    ~myList();
+    ~sqList();
 };
 
 template <typename ElemType>
-myList<ElemType>::myList(/* args */)
+sqList<ElemType>::sqList(/* args */)
 {
     this->size = MAXSIZE;
     this->length = 0;
 };
 
 template <typename ElemType>
-bool myList<ElemType>::listDelete(myList *lst, int ind, ElemType *e)
+bool sqList<ElemType>::listDelete(sqList *lst, int ind, ElemType *e)
 {
     if (lst->length == 0)
     {
@@ -53,7 +53,7 @@ bool myList<ElemType>::listDelete(myList *lst, int ind, ElemType *e)
 }
 
 template <typename ElemType>
-bool myList<ElemType>::listInsert(myList *lst, int ind, ElemType *e)
+bool sqList<ElemType>::listInsert(sqList *lst, int ind, ElemType *e)
 {
     if (lst->length >= lst->size)
     {
@@ -76,7 +76,7 @@ bool myList<ElemType>::listInsert(myList *lst, int ind, ElemType *e)
 }
 
 template <typename ElemType>
-void myList<ElemType>::showElems()
+void sqList<ElemType>::showElems()
 {
     for (int i = 0; i < this->length; ++i)
     {
@@ -89,7 +89,7 @@ void myList<ElemType>::showElems()
  * Return 1 means getted element, otherwise return 0. 
 */
 template <typename ElemType>
-bool myList<ElemType>::getElem(myList *lst, int ind, ElemType *e)
+bool sqList<ElemType>::getElem(sqList *lst, int ind, ElemType *e)
 {
     if (lst->length <= 0 || ind >= lst->length || ind < 0)
     {
@@ -99,19 +99,19 @@ bool myList<ElemType>::getElem(myList *lst, int ind, ElemType *e)
     return OK;
 }
 template <typename ElemType>
-int myList<ElemType>::getLength()
+int sqList<ElemType>::getLength()
 {
     return this->length;
 }
 
 template <typename ElemType>
-int myList<ElemType>::getSize()
+int sqList<ElemType>::getSize()
 {
     return this->size;
 }
 
 template <typename ElemType>
-bool myList<ElemType>::setElem(int ind, ElemType e)
+bool sqList<ElemType>::setElem(int ind, ElemType e)
 {
     if (ind >= this->size || ind < 0)
     {
@@ -123,7 +123,7 @@ bool myList<ElemType>::setElem(int ind, ElemType e)
 }
 
 template <typename ElemType>
-myList<ElemType>::~myList()
+sqList<ElemType>::~sqList()
 {
 }
 

@@ -1,18 +1,19 @@
 #include "heads.h"
-#include "myList.hpp"
+#include "sqList.hpp"
 #include "linkLIst.hpp"
+#include "sqStack.hpp"
 #include "tools.h"
 using namespace std;
-
 int main()
 {
-    // init a linkList
-    linkList<int> headNode;
-    linkList<int>::creatListHead(&headNode, 20);
-    linkList<int>::showElems(&headNode);
-    linkList<int> *p = &headNode;
-    linkList<int>::showElems(p);
-    linkList<int>::clearListHead(p);
-    linkList<int>::showElems(p);
-
+    sqStack<int> *p = new sqStack<int>();
+    for(int i = 0; i <10; ++i)
+    {
+        sqStack<int>::pushElem(p, i);
+    }
+    p->showElems();
+    int e = 0;
+    sqStack<int>::popElem(p, &e);
+    cout << e << endl;
+    p->showElems();
 }
