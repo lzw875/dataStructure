@@ -8,9 +8,9 @@ template <typename ElemType>
 class linkList
 {
 private:
-    ElemType data;
 
 public:
+    ElemType data;
     linkList *next = nullptr;
     linkList(/* args */);
     linkList(ElemType e);
