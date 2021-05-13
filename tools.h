@@ -4,11 +4,11 @@
 using namespace std;
 
 template<class T>
-void dispList(T *lst, int len)
+void displArray(T *lst, int len)
 {
     for(int i = 0; i < len; ++i)
     {
-        cout << lst->data[i] << " ";
+        cout << lst[i] << " ";
         ++lst;
     }
     cout << endl;
