@@ -1,14 +1,14 @@
 #include "heads.h"
 #include "tools.h"
 #include "sorted.hpp"
+// #include "biTree.hpp"
 using namespace std;
 
-int main()
+int main(int argc, char const *argv[])
 {
-    char *p = nullptr;
-    cout << sizeof(p) << endl;
-    cout << sizeof(*p) << endl;
-    char str[16] = {0};
-    cout << sizeof(str) << endl;
-    cout << sizeof(&str[0]) << endl;
+    // biTree<char> root;
+    // char str[] = "AB#D##C##";
+    // int end = sizeof(str) - 2;
+    // biTree<char>::creatBiTree(&root, str, 0, end);
+    return 0;
 }
