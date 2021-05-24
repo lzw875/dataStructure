@@ -2,6 +2,7 @@
 #include "tools.h"
 #include "sorted.hpp"
 #include "biTree.hpp"
+#include "searchAlgorithms.hpp"
 using namespace std;
 void testAddress(int *a)
 {
@@ -10,11 +11,7 @@ void testAddress(int *a)
 }
 int main(int argc, char const *argv[])
 {
-    biTree<char> root;
-    char str[] = "AB#D##C##";
-    int end = sizeof(str) - 2;
-    int ptr = 0;
-    biTree<char>::creatBiTree(&root, str, &ptr, end);
-    biTree<char>::preOrderTraverse(&root);
-    return 0;
+    int a[] = {0, 1, 16, 24, 35, 47, 59, 62, 73, 88, 99};
+    int endIndex = end(a) - begin(a) - 1;
+    cout << binarySearch<int>(a, endIndex, 99) << endl;
 }
