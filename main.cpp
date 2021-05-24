@@ -3,7 +3,11 @@
 #include "sorted.hpp"
 #include "biTree.hpp"
 using namespace std;
-
+void testAddress(int *a)
+{
+    cout << "address: " << a << "  value: " << *a << endl;
+    ++*a;
+}
 int main(int argc, char const *argv[])
 {
     biTree<char> root;
@@ -11,7 +15,6 @@ int main(int argc, char const *argv[])
     int end = sizeof(str) - 2;
     int ptr = 0;
     biTree<char>::creatBiTree(&root, str, &ptr, end);
-    // cout << root.data << endl;
     biTree<char>::preOrderTraverse(&root);
     return 0;
 }
