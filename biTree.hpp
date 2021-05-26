@@ -35,12 +35,10 @@ bool biTree<ElemType>::insertBST(biTree *root, ElemType key)
     biTree<ElemType> *p = new biTree<ElemType>();
     if (!searchBST(root, key, &p))
     {
-
-        p->data = key;
-        // if (key > p->data)
-            // p->right->data = key;
-        // else
-            // p->left->data = key;
+        if (key > p->data)
+            p->right = new biTree<ElemType>(key);
+        else
+            p->left = new biTree<ElemType>(key);
         return OK;
     }
     else
@@ -62,16 +60,11 @@ bool biTree<ElemType>::searchBST(biTree *root, ElemType key, biTree **retTree)
 {
     // base case
     if (!root)
-    {
-        *retTree = root;
         return NO_KEY;
-    }
-
+    
+    *retTree = root;
     if (root->data == key)
-    {
-        *retTree = root;
         return OK;
-    }
     else if (root->data > key)
         return searchBST(root->left, key, retTree);
     else
