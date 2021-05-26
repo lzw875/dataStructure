@@ -4,14 +4,16 @@
 #include "biTree.hpp"
 #include "searchAlgorithms.hpp"
 using namespace std;
-void testAddress(int *a)
-{
-    cout << "address: " << a << "  value: " << *a << endl;
-    ++*a;
-}
+
+
 int main(int argc, char const *argv[])
 {
-    int a[] = {0, 1, 16, 24, 35, 47, 59, 62, 73, 88, 99};
-    int endIndex = end(a) - begin(a) - 1;
-    cout << binarySearch<int>(a, endIndex, 99) << endl;
+    biTree<int> *root = new biTree<int>(0);
+    int arr[] = {1, 16, 24, 35, 47, 59, 62, 73, 88, 99};
+    // int arr[] = {0, 1, 16, 24, 35, 47, 59, 62, 73, 88, 99};
+    for (int e : arr)
+    {
+        cout << biTree<int>::insertBST(root, e) << ' ';
+    }
+    cout << endl;
 }
