@@ -13,6 +13,7 @@ public:
     static void swp(ElemType *e1, ElemType *e2);
     static void showElems(ElemType *arr, const int len);
     // Ascending sequence
+    static void selectionSort(ElemType *arr, const int len);
     static void bubbleAscSort0(ElemType *arr, const int len);
     static void bubbleAscSort(ElemType *arr, const int len);
     static void bubbleAscSort2(ElemType *arr, const int len);
@@ -22,6 +23,22 @@ public:
     static void bubbleDesSort(ElemType *arr, const int len);
     static void bubbleDesSort2(ElemType *arr, const int len);
 };
+
+template <typename ElemType>
+void sorted<ElemType>::selectionSort(ElemType *arr, const int len)
+{
+    for(int i = 0; i < len; ++i)
+    {
+        int ind = i;
+        for (int j = i+1; j < len; j++)
+        {
+            if(arr[i] > arr[j])
+                ind = j;
+        }
+        swp(&arr[i], &arr[ind]);
+    }
+}
+
 template <typename ElemType>
 void sorted<ElemType>::bubbleDesSort2(ElemType *arr, const int len)
 {
@@ -50,7 +67,6 @@ void sorted<ElemType>::bubbleAscSort2(ElemType *arr, const int len)
     bool breakFlag = false;
     for (int i = 0; i < len && !breakFlag; ++i)
     {
-        cout << i << endl;
         breakFlag = true;
         for (int j = len - 1; j > i; --j)
         {

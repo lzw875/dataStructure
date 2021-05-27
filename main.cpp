@@ -12,6 +12,9 @@ void testAddress(int *a)
 int main(int argc, char const *argv[])
 {
     int a[] = {0, 1, 16, 24, 35, 47, 59, 62, 73, 88, 99};
-    int endIndex = end(a) - begin(a) - 1;
-    cout << binarySearch<int>(a, endIndex, 99) << endl;
+    int len = end(a) - begin(a);
+    // int endIndex = end(a) - begin(a) - 1;
+    // cout << binarySearch<int>(a, endIndex, 99) << endl;
+    sorted<int>::selectionSort(a, len);
+    displArray<int>(a, len);
 }
