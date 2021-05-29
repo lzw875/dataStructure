@@ -4,6 +4,9 @@ template <typename ElemType>
 class sorted
 {
 private:
+    static void merge(ElemType *arr0, ElemType *arr1, int fst, int m, int lst);
+    static int partition(ElemType *arr, int fst, int lst);
+
 public:
     const static int MAXSIZE = 10;
     ElemType data[MAXSIZE] = {9, 1, 5, 8, 3, 7, 4, 6, 2, 0};
@@ -13,6 +16,8 @@ public:
     static void swp(ElemType *e1, ElemType *e2);
     static void showElems(ElemType *arr, const int len);
     // Ascending sequence
+    static void quickAscSort(ElemType *arr, const int &fst, const int &lst);
+    static void mergeAscSort(ElemType *arrSrc, ElemType *arr1, const int fst, const int lst);
     static void shellAscSort(ElemType *arr, const int len);
     static void insertAscSort(ElemType *arr, const int len);
     static void selectionAscSort(ElemType *arr, const int len);
@@ -25,6 +30,101 @@ public:
     static void bubbleDesSort(ElemType *arr, const int len);
     static void bubbleDesSort2(ElemType *arr, const int len);
 };
+
+template <typename ElemType>
+int sorted<ElemType>::partition(ElemType *arr, int fst, int lst)
+{
+    ElemType pivotValue = arr[fst];
+    while (fst < lst)
+    {
+        while (fst < lst && arr[lst] > pivotValue)
+            lst--;
+        swp(&arr[fst], &arr[lst]);
+        while (fst < lst && arr[fst] < pivotValue)
+            fst++;
+        swp(&arr[fst], &arr[lst]);
+    }
+    return fst;
+}
+
+/**
+ * @brief 快速排序算法
+ * 
+ * @tparam ElemType 
+ * @param arr array
+ * @param fst index of the first element from arr
+ * @param lst index of the last
+ */
+template <typename ElemType>
+void sorted<ElemType>::quickAscSort(ElemType *arr, const int &fst, const int &lst)
+{
+    int pivot; /*pivot: 枢轴*/
+    if (fst < lst)
+    {
+        pivot = partition(arr, fst, lst);
+        quickAscSort(arr, fst, pivot - 1);
+        quickAscSort(arr, pivot + 1, lst);
+    }
+}
+
+/**
+ * @brief 数组归并，将arr0[fst, ..., m]和arr0[m+1, ..., lst]，合并到arr1中。
+ * 
+ * @tparam ElemType 
+ * @param arr0
+ * @param arr1 
+ * @param fst 
+ * @param m 
+ * @param lst 
+ */
+template <typename ElemType>
+void sorted<ElemType>::merge(ElemType *arr0, ElemType *arr1, int fst, int m, int lst)
+{
+    int j, k;
+    for (j = m + 1, k = fst; fst <= m && j <= lst; ++k) // 将arr0中记录由小到大归并到arr1
+    {
+        if (arr0[fst] < arr0[j])
+            arr1[k] = arr0[fst++];
+        else
+            arr1[k] = arr0[j++];
+    }
+    if (fst <= m) // 将剩余的arr0[fst, ..., m]复制到arr1
+    {
+        for (int l = 0; l <= m - fst; ++l)
+            arr1[k + l] = arr0[fst + l];
+    }
+    if (j <= lst) // 将剩余的arr0[j, ..., lst]复制到arr1
+    {
+        for (int l = 0; l <= lst - j; ++l)
+            arr1[k + l] = arr0[j + l];
+    }
+}
+
+/**
+ * @brief 归并排序算法
+ * 
+ * @tparam ElemType 
+ * @param arrSource 
+ * @param arr1 
+ * @param fst 首元素的索引
+ * @param lst 末尾元素索引
+ */
+template <typename ElemType>
+void sorted<ElemType>::mergeAscSort(ElemType *arrSrc, ElemType *arr1, const int fst, const int lst)
+{
+    int m;
+    ElemType arr2[lst + 1];
+    // base case
+    if (fst == lst)
+        arr1[fst] = arrSrc[fst];
+    else
+    {
+        m = (fst + lst) / 2;
+        mergeAscSort(arrSrc, arr2, fst, m);
+        mergeAscSort(arrSrc, arr2, m + 1, lst);
+        merge(arr2, arr1, fst, m, lst);
+    }
+}
 
 /**
  * @brief gap指两个数据的间隔，以gap为间隔遍历数组，对于违反顺序的两个数据将互换位置。
