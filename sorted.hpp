@@ -13,7 +13,9 @@ public:
     static void swp(ElemType *e1, ElemType *e2);
     static void showElems(ElemType *arr, const int len);
     // Ascending sequence
-    static void selectionSort(ElemType *arr, const int len);
+    static void shellAscSort(ElemType *arr, const int len);
+    static void insertAscSort(ElemType *arr, const int len);
+    static void selectionAscSort(ElemType *arr, const int len);
     static void bubbleAscSort0(ElemType *arr, const int len);
     static void bubbleAscSort(ElemType *arr, const int len);
     static void bubbleAscSort2(ElemType *arr, const int len);
@@ -24,18 +26,61 @@ public:
     static void bubbleDesSort2(ElemType *arr, const int len);
 };
 
+/**
+ * @brief gap指两个数据的间隔，以gap为间隔遍历数组，对于违反顺序的两个数据将互换位置。
+ * gap 会逐渐减小，继续遍历，直到gap=1。
+ */
 template <typename ElemType>
-void sorted<ElemType>::selectionSort(ElemType *arr, const int len)
+void sorted<ElemType>::shellAscSort(ElemType *arr, const int len)
 {
-    for(int i = 0; i < len; ++i)
+    int gap = len;
+    while (gap > 1)
+    {
+        gap = gap / 3 + 1;
+        cout << "gap: " << gap << endl;
+        for (int i = gap; i < len; i++)
+        {
+            if (arr[i] < arr[i - gap])
+            {
+                for (int j = i - gap; j >= 0 && arr[j] > arr[j + gap]; j -= gap)
+                    swp(&arr[j], &arr[j + gap]);
+            }
+        }
+    }
+}
+
+template <typename ElemType>
+void sorted<ElemType>::insertAscSort(ElemType *arr, const int len)
+{
+    for (int i = 0; i + 1 < len; i++)
+    {
+        // 从未排序区域[i+1, len)，取第一个数 arr[i + 1]
+        // 插入到已排序区域[0, i]，
+        for (int j = 0; j <= i; j++)
+        {
+            // 轮训到比arr[i+1]更大的数后，两者交换位置，
+            // 然后继续轮训，直到原已排区域全部轮训完。
+            if (arr[i + 1] < arr[j])
+                swp(&arr[i + 1], &arr[j]);
+        }
+    }
+}
+
+template <typename ElemType>
+void sorted<ElemType>::selectionAscSort(ElemType *arr, const int len)
+{
+    for (int i = 0; i < len; ++i)
     {
         int ind = i;
-        for (int j = i+1; j < len; j++)
+        // 从未排序区域[i+1,len)，选择出最小值
+        for (int j = i + 1; j < len; j++)
         {
-            if(arr[i] > arr[j])
+            if (arr[ind] > arr[j])
                 ind = j;
         }
-        swp(&arr[i], &arr[ind]);
+        // 插入到已排序区域0到i
+        if (ind != i)
+            swp(&arr[i], &arr[ind]);
     }
 }
 
@@ -51,10 +96,10 @@ void sorted<ElemType>::bubbleDesSort2(ElemType *arr, const int len)
         breakFlag = true;
         for (int j = len - 1; j > i; --j)
         {
-            if(arr[j-1] < arr[j])
+            if (arr[j - 1] < arr[j])
             {
                 breakFlag = false;
-                swp(&arr[j-1], &arr[j]);
+                swp(&arr[j - 1], &arr[j]);
             }
         }
     }
@@ -70,10 +115,10 @@ void sorted<ElemType>::bubbleAscSort2(ElemType *arr, const int len)
         breakFlag = true;
         for (int j = len - 1; j > i; --j)
         {
-            if(arr[j-1] > arr[j])
+            if (arr[j - 1] > arr[j])
             {
                 breakFlag = false;
-                swp(&arr[j-1], &arr[j]);
+                swp(&arr[j - 1], &arr[j]);
             }
         }
     }
@@ -88,9 +133,9 @@ void sorted<ElemType>::bubbleDesSort(ElemType *arr, const int len)
     {
         for (int j = len - 1; j > i; --j)
         {
-            if(arr[j-1] < arr[j])
+            if (arr[j - 1] < arr[j])
             {
-                swp(&arr[j-1], &arr[j]);
+                swp(&arr[j - 1], &arr[j]);
             }
         }
     }
@@ -103,9 +148,9 @@ void sorted<ElemType>::bubbleAscSort(ElemType *arr, const int len)
     {
         for (int j = len - 1; j > i; --j)
         {
-            if(arr[j-1] > arr[j])
+            if (arr[j - 1] > arr[j])
             {
-                swp(&arr[j-1], &arr[j]);
+                swp(&arr[j - 1], &arr[j]);
             }
         }
     }
